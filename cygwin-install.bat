@@ -18,21 +18,25 @@ IF NOT EXIST cygwin-setup.exe (
  
 REM -- Configure our paths
 SET SITE=http://cygwin.mirrors.pair.com/
-SET LOCALDIR=%CD%
+SET LOCALDIR=C:/cygwin-packages
 SET ROOTDIR=C:/cygwin
  
 REM -- These are the packages we will install (in addition to the default packages)
-SET PACKAGES=mintty,wget,ctags,diffutils,git,git-completion,git-svn,stgit,mercurial
+SET PACKAGES=mintty,wget,ctags,diffutils,git,git-completion,git-svn,stgit,openssh,bash-completion,curl,make
 REM -- These are necessary for apt-cyg install, do not change. Any duplicates will be ignored.
 SET PACKAGES=%PACKAGES%,wget,tar,gawk,bzip2,subversion
+REM -- Add programming languages
+SET PACKAGES=%PACKAGES%,python37,python37-pip,perl-libwww-perl
+REM -- More generic utils
+SET PACKAGES=%PACKAGES%,tree,jq,unzip,graphviz,autossh,vim,tmux
  
 REM -- More info on command line options at: https://cygwin.com/faq/faq.html#faq.setup.cli
 REM -- Do it!
-ECHO *** INSTALLING DEFAULT PACKAGES
+ECHO *** Installing default packages
 cygwin-setup --quiet-mode --no-desktop --download --local-install --no-verify -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%"
 ECHO.
 ECHO.
-ECHO *** INSTALLING CUSTOM PACKAGES
+ECHO *** Installing custom packages
 cygwin-setup -q -d -D -L -X -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%" -P %PACKAGES%
  
 REM -- Show what we did
@@ -42,11 +46,20 @@ ECHO cygwin installation updated
 ECHO  - %PACKAGES%
 ECHO.
 
-ECHO apt-cyg installing.
 set PATH=%ROOTDIR%/bin;%PATH%
-%ROOTDIR%/bin/bash.exe -c 'svn --force export http://apt-cyg.googlecode.com/svn/trunk/ /bin/'
-%ROOTDIR%/bin/bash.exe -c 'chmod +x /bin/apt-cyg'
-ECHO apt-cyg installed if it says somin like "A    /bin" and "A   /bin/apt-cyg" and "Exported revision 18" or some other number.
+ECHO *** Installing apt-cyg
+%ROOTDIR%/bin/bash.exe -c "wget rawgit.com/transcode-open/apt-cyg/master/apt-cyg && install apt-cyg /bin"
+ECHO *** Making the C: drive accessible via /c/ instead of /cygdrive/c/
+%ROOTDIR%/bin/bash.exe -c "sed -i.orig -e 's/\/cygdrive cygdrive/\/ cygdrive/' /etc/fstab"
+ECHO *** Installing the AWS cli via pip
+%ROOTDIR%/bin/bash.exe -c "pip3.7 install awscli --upgrade --user"
+ECHO *** Symlinking .gradle and .aws folders
+IF NOT EXIST %ROOTDIR%\home\%USERNAME%\.gradle (
+	mklink /j "%ROOTDIR%\home\%USERNAME%\.gradle" "%USERPROFILE%\.gradle"
+)
+IF NOT EXIST %ROOTDIR%\home\%USERNAME%\.aws (
+	mklink /j "%ROOTDIR%\home\%USERNAME%\.aws" "%USERPROFILE%\.aws"
+)
 
 ENDLOCAL
  
