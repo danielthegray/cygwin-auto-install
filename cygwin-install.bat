@@ -24,11 +24,11 @@ SET ROOTDIR=C:/cygwin
 REM -- These are the packages we will install (in addition to the default packages)
 SET PACKAGES=mintty,wget,ctags,diffutils,git,git-completion,git-svn,stgit,openssh,bash-completion,curl,make
 REM -- These are necessary for apt-cyg install, do not change. Any duplicates will be ignored.
-SET PACKAGES=%PACKAGES%,wget,tar,gawk,bzip2,subversion
+SET PACKAGES=%PACKAGES%,wget,tar,gawk,bzip2,subversion,unzip,xz
 REM -- Add programming languages
 SET PACKAGES=%PACKAGES%,python37,python37-pip,perl-libwww-perl
 REM -- More generic utils
-SET PACKAGES=%PACKAGES%,tree,jq,unzip,graphviz,autossh,vim,tmux
+SET PACKAGES=%PACKAGES%,tree,jq,graphviz,autossh,vim,tmux,dos2unix,expect
  
 REM -- More info on command line options at: https://cygwin.com/faq/faq.html#faq.setup.cli
 REM -- Do it!
