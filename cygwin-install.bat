@@ -53,6 +53,8 @@ ECHO *** Making the C: drive accessible via /c/ instead of /cygdrive/c/
 %ROOTDIR%/bin/bash.exe -c "sed -i.orig -e 's/\/cygdrive cygdrive/\/ cygdrive/' /etc/fstab"
 ECHO *** Installing the AWS cli via pip
 %ROOTDIR%/bin/bash.exe -c "pip3.7 install awscli --upgrade --user"
+ECHO *** Pre-creating the user's home folder
+mkdir "%ROOTDIR%\home\%USERNAME%"
 ECHO *** Symlinking .gradle and .aws folders
 IF NOT EXIST %ROOTDIR%\home\%USERNAME%\.gradle (
 	mklink /j "%ROOTDIR%\home\%USERNAME%\.gradle" "%USERPROFILE%\.gradle"
