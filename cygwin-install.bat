@@ -53,18 +53,22 @@ ECHO *** Making the C: drive accessible via /c/ instead of /cygdrive/c/
 %ROOTDIR%/bin/bash.exe -c "sed -i.orig -e 's/\/cygdrive cygdrive/\/ cygdrive/' /etc/fstab"
 ECHO *** Installing the AWS cli via pip
 %ROOTDIR%/bin/bash.exe -c "pip3.7 install awscli --upgrade --user"
-ECHO *** Pre-creating the user's home folder
-mkdir "%ROOTDIR%\home\%USERNAME%"
-ECHO *** Symlinking .gradle and .aws folders
-IF NOT EXIST %ROOTDIR%\home\%USERNAME%\.gradle (
-	mklink /j "%ROOTDIR%\home\%USERNAME%\.gradle" "%USERPROFILE%\.gradle"
+ECHO *** Set up home folder symlinks
+IF NOT EXIST "%ROOTDIR%\home\%USERNAME%" (
+	mkdir "%ROOTDIR%\home\%USERNAME%"
 )
-IF NOT EXIST %ROOTDIR%\home\%USERNAME%\.aws (
-	mklink /j "%ROOTDIR%\home\%USERNAME%\.aws" "%USERPROFILE%\.aws"
+ECHO ".gradle" > _folders_to_symlink.txt
+ECHO ".aws" >> _folders_to_symlink.txt
+ECHO ".ssh" >> _folders_to_symlink.txt
+FOR /F "delims=; eol=;" %f IN (_folders_to_symlink.txt) DO (
+	IF NOT EXIST "%USERPROFILE%\%f" (
+		mkdir "%USERPROFILE%\%f"
+	)
+	IF NOT EXIST "%ROOTDIR%\home\%USERNAME%\%f" (
+		mklink /j "%ROOTDIR%\home\%USERNAME%\%f" "%USERPROFILE%\%f"
+	)
 )
-IF NOT EXIST %ROOTDIR%\home\%USERNAME%\.ssh (
-	mklink /j "%ROOTDIR%\home\%USERNAME%\.ssh" "%USERPROFILE%\.ssh"
-)
+DEL _folders_to_symlink.txt
 
 ENDLOCAL
  
