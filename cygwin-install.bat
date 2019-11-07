@@ -60,6 +60,9 @@ IF NOT EXIST %ROOTDIR%\home\%USERNAME%\.gradle (
 IF NOT EXIST %ROOTDIR%\home\%USERNAME%\.aws (
 	mklink /j "%ROOTDIR%\home\%USERNAME%\.aws" "%USERPROFILE%\.aws"
 )
+IF NOT EXIST %ROOTDIR%\home\%USERNAME%\.ssh (
+	mklink /j "%ROOTDIR%\home\%USERNAME%\.ssh" "%USERPROFILE%\.ssh"
+)
 
 ENDLOCAL
  
