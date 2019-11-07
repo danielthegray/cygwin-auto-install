@@ -33,11 +33,11 @@ SET PACKAGES=%PACKAGES%,tree,jq,graphviz,autossh,vim,tmux,dos2unix,expect
 REM -- More info on command line options at: https://cygwin.com/faq/faq.html#faq.setup.cli
 REM -- Do it!
 ECHO *** Installing default packages
-cygwin-setup --quiet-mode --no-desktop --download --local-install --no-verify -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%"
+cygwin-setup --wait --quiet-mode --no-desktop --download --local-install --site %SITE% --local-package-dir "%LOCALDIR%" --root "%ROOTDIR%"
 ECHO.
 ECHO.
 ECHO *** Installing custom packages
-cygwin-setup -q -d -D -L -X -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%" -P %PACKAGES%
+cygwin-setup --wait --quiet-mode --no-desktop --download --local-install --site %SITE% --local-package-dir "%LOCALDIR%" --root "%ROOTDIR%" --packages %PACKAGES%
  
 REM -- Show what we did
 ECHO.
