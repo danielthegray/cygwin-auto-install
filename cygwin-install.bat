@@ -57,18 +57,24 @@ ECHO *** Set up home folder symlinks
 IF NOT EXIST "%ROOTDIR%\home\%USERNAME%" (
 	mkdir "%ROOTDIR%\home\%USERNAME%"
 )
-ECHO ".gradle" > _folders_to_symlink.txt
-ECHO ".aws" >> _folders_to_symlink.txt
-ECHO ".ssh" >> _folders_to_symlink.txt
-FOR /F "delims=; eol=;" %f IN (_folders_to_symlink.txt) DO (
-	IF NOT EXIST "%USERPROFILE%\%f" (
-		mkdir "%USERPROFILE%\%f"
-	)
-	IF NOT EXIST "%ROOTDIR%\home\%USERNAME%\%f" (
-		mklink /j "%ROOTDIR%\home\%USERNAME%\%f" "%USERPROFILE%\%f"
-	)
+IF NOT EXIST "%USERPROFILE%\.gradle" (
+	mkdir "%USERPROFILE%\.gradle"
 )
-DEL _folders_to_symlink.txt
+IF NOT EXIST "%ROOTDIR%\home\%USERNAME%\.gradle" (
+	mklink /j "%ROOTDIR%\home\%USERNAME%\.gradle" "%USERPROFILE%\.gradle"
+)
+IF NOT EXIST "%USERPROFILE%\.aws" (
+	mkdir "%USERPROFILE%\.aws"
+)
+IF NOT EXIST "%ROOTDIR%\home\%USERNAME%\.aws" (
+	mklink /j "%ROOTDIR%\home\%USERNAME%\.aws" "%USERPROFILE%\.aws"
+)
+IF NOT EXIST "%USERPROFILE%\.ssh" (
+	mkdir "%USERPROFILE%\.ssh"
+)
+IF NOT EXIST "%ROOTDIR%\home\%USERNAME%\.ssh" (
+	mklink /j "%ROOTDIR%\home\%USERNAME%\.ssh" "%USERPROFILE%\.ssh"
+)
 
 ENDLOCAL
  
