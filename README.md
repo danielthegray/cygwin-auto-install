@@ -6,12 +6,7 @@ Automated cygwin install. Just download the project as a zip file, extract and r
 You can edit the batch file to specify which optional packages you'd like installed.
 
 Created by wjrogers: https://gist.github.com/wjrogers/1016065.
+Original project: https://github.com/rtwolf/cygwin-auto-install/
+My fork: https://github.com/danielthegray/cygwin-auto-install
 
-Suggest this workflow for this project: http://scottchacon.com/2011/08/31/github-flow.html
-
-Source URL:
-https://github.com/rtwolf/cygwin-auto-install/
-
-If you've found this project helpful, please support me by buying me a coffee: http://www.mind-manual.com/blog/buy-me-a-coffee/
-
-As you may know, "A programmer is just a tool which converts caffeine into code". Thanks in advance!
+I (Daniel) added folder symlinking and some environment setup that was to my liking.
