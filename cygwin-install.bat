@@ -19,7 +19,7 @@ IF NOT EXIST cygwin-setup.exe (
 REM -- Configure our paths
 SET SITE=http://cygwin.mirrors.pair.com/
 SET LOCALDIR=C:/cygwin-packages
-SET ROOTDIR=C:/cygwin
+SET ROOTDIR=C:/cygwin64
  
 REM -- These are the packages we will install (in addition to the default packages)
 SET PACKAGES=mintty,wget,ctags,diffutils,git,git-completion,git-svn,stgit,openssh,bash-completion,curl,make
