@@ -18,7 +18,7 @@ IF NOT EXIST cygwin-setup.exe (
  
 REM -- Configure our paths
 SET SITE=http://cygwin.mirrors.pair.com/
-SET LOCALDIR=C:/cygwin-packages
+SET LOCALDIR=C:/cygwin64/packages
 SET ROOTDIR=C:/cygwin64
  
 REM -- These are the packages we will install (in addition to the default packages)
