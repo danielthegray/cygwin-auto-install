@@ -26,7 +26,7 @@ SET PACKAGES=mintty,wget,ctags,diffutils,git,git-completion,git-svn,stgit,openss
 REM -- These are necessary for apt-cyg install, do not change. Any duplicates will be ignored.
 SET PACKAGES=%PACKAGES%,wget,tar,gawk,bzip2,subversion,unzip,xz
 REM -- Add programming languages
-SET PACKAGES=%PACKAGES%,python37,python37-pip,perl-libwww-perl,perl-Net-SSLeay
+SET PACKAGES=%PACKAGES%,python37,python37-pip,perl-libwww-perl,perl-Net-SSLeay,perl-YAML
 REM -- More generic utils
 SET PACKAGES=%PACKAGES%,tree,jq,graphviz,autossh,vim,tmux,dos2unix,expect,moreutils
  
